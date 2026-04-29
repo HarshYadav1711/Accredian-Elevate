@@ -110,7 +110,7 @@ This approach demonstrates real API integration while remaining **self-contained
 
 ---
 
-## AI Usage (As Required by Assignment)
+## AI Usage
 
 AI tools were used as a **productivity layer**, not as a replacement for decision-making.
 
