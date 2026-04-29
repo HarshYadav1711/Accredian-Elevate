@@ -6,7 +6,7 @@ export function TrustRow() {
     <Section className="border-y border-slate-200 bg-white" containerClassName="py-8 lg:py-10">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <p className="text-sm font-medium text-slate-600">
-          Trusted by teams scaling enterprise capability across industries
+          Trusted by teams scaling enterprise capability across industries, with 45K+ employees trained across programs.
         </p>
         <ul className="flex flex-wrap gap-2">
           {trustBadges.map((badge) => (
