@@ -7,11 +7,11 @@ export function HeroSection() {
         <div className="lg:col-span-7">
           <p className="eyebrow">Enterprise Workforce Transformation</p>
           <h1 className="heading-display mt-5">
-            Turn strategic skills goals into measurable team performance.
+            Close critical skill gaps and improve role readiness across teams.
           </h1>
           <p className="body-lg mt-6 max-w-2xl">
-            Build future-ready teams through role-focused learning journeys, operationally sound
-            delivery, and outcome tracking built for enterprise decision-makers.
+            Launch role-specific learning programs with clear milestones, manager accountability,
+            and reporting that shows business impact, not just course activity.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#solutions" className="btn btn-primary">
@@ -23,7 +23,7 @@ export function HeroSection() {
           </div>
         </div>
         <div className="surface-card lg:col-span-5">
-          <p className="text-sm font-medium text-slate-700">Program impact snapshot</p>
+          <p className="text-sm font-medium text-slate-700">Delivery performance snapshot</p>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <p className="text-xs text-slate-500">Completion quality</p>

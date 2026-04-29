@@ -13,6 +13,7 @@ export default function Home() {
       <div id="top" />
       <SiteHeader />
       <main id="main-content">
+        {/* Compose sections in top-to-bottom narrative order to keep scanning predictable. */}
         <HeroSection />
         <TrustRow />
         <OfferingsSection />

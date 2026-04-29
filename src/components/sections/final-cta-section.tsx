@@ -10,11 +10,11 @@ export function FinalCtaSection() {
             Ready to get started
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Plan your enterprise upskilling roadmap with confidence.
+            Build a practical upskilling plan your teams can execute this quarter.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            Share your team context and goals. We will recommend a practical rollout model with
-            milestones, governance, and measurable outcomes.
+            Share your role priorities, baseline maturity, and business targets. We will propose a
+            scoped rollout with milestones, ownership, and measurable outcomes.
           </p>
           <p className="mt-6 text-sm text-slate-300">Response time: within 1 business day.</p>
           <a
@@ -28,7 +28,7 @@ export function FinalCtaSection() {
           <div className="mb-4">
             <h3 className="text-lg font-semibold text-slate-900">Book a consultation</h3>
             <p className="mt-1 text-sm text-slate-600">
-              Tell us what your teams need and we will get back with a tailored plan.
+              Tell us what outcomes matter most, and we will return with a tailored program plan.
             </p>
           </div>
           <LeadCaptureForm />

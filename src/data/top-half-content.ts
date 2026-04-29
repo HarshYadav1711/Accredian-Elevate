@@ -10,32 +10,32 @@ export const offerings = [
   {
     title: "Role-Based Learning Academies",
     description:
-      "Design structured pathways for product, data, engineering, and business teams with role-aligned outcomes.",
+      "Define clear capability milestones for product, data, engineering, and business roles, then run cohorts against those targets.",
   },
   {
     title: "Workforce Capability Diagnostics",
     description:
-      "Benchmark team readiness, identify critical skill gaps, and prioritize interventions tied to business goals.",
+      "Assess current team readiness, quantify high-risk gaps, and prioritize interventions based on near-term business goals.",
   },
   {
     title: "Cohort Delivery and Governance",
     description:
-      "Run enterprise cohorts with consistent communication, mentorship rhythms, and leadership visibility.",
+      "Operate cohorts with weekly governance, manager checkpoints, and progress reporting aligned to leadership reviews.",
   },
   {
     title: "Outcome Reporting for Stakeholders",
     description:
-      "Track completion quality, competency progression, and adoption metrics with executive-ready reporting.",
+      "Report completion quality, competency progression, and on-the-job adoption through dashboards built for stakeholders.",
   },
   {
     title: "Manager-Led Reinforcement",
     description:
-      "Enable managers with playbooks and checkpoints that improve transfer of learning into real project execution.",
+      "Equip managers with reinforcement playbooks and review checkpoints that convert learning into project performance.",
   },
   {
     title: "Capability Roadmap Advisory",
     description:
-      "Translate transformation goals into an actionable multi-quarter upskilling roadmap across business units.",
+      "Translate transformation priorities into a multi-quarter roadmap with sequencing, ownership, and measurable outcomes.",
   },
 ];
 
@@ -63,21 +63,21 @@ export const processSteps = [
 ];
 
 export const outcomeStats = [
-  { value: "82%", label: "Average completion quality" },
-  { value: "3.4x", label: "Faster role readiness" },
-  { value: "45K+", label: "Professionals upskilled" },
+  { value: "82%", label: "Cohort completion quality" },
+  { value: "3.4x", label: "Improvement in role readiness" },
+  { value: "45K+", label: "Employees trained across programs" },
 ];
 
 export const testimonials = [
   {
     quote:
-      "Accredian helped us move from fragmented training efforts to a unified enterprise capability model with clear ownership.",
+      "We replaced disconnected training vendors with one capability framework and a single operating rhythm our business leaders could follow.",
     author: "Director, Enterprise Learning",
     company: "Digital Services Organization",
   },
   {
     quote:
-      "The manager reinforcement model improved real project application, not just course completion, across our product and data teams.",
+      "Manager-led checkpoints changed the quality of project delivery. Teams were not just finishing modules, they were applying skills on live work.",
     author: "VP, Talent Transformation",
     company: "Global Technology Enterprise",
   },

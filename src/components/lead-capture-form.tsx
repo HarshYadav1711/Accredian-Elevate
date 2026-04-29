@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import type { LeadRequest } from "@/types/lead";
 
 const initialForm: LeadRequest = {
@@ -16,6 +16,7 @@ export function LeadCaptureForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof LeadRequest, string>>>({});
+  const inputRefs = useRef<Partial<Record<keyof LeadRequest, HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null>>>({});
 
   const updateField = (key: keyof LeadRequest, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -23,6 +24,7 @@ export function LeadCaptureForm() {
   };
 
   const validate = () => {
+    // Mirror server checks locally so users get instant, field-specific feedback.
     const errors: Partial<Record<keyof LeadRequest, string>> = {};
 
     if (!form.fullName.trim() || form.fullName.trim().length < 2) {
@@ -42,6 +44,10 @@ export function LeadCaptureForm() {
     }
 
     setFieldErrors(errors);
+    const firstInvalidField = (Object.keys(errors)[0] || "") as keyof LeadRequest;
+    if (firstInvalidField) {
+      inputRefs.current[firstInvalidField]?.focus();
+    }
     return Object.keys(errors).length === 0;
   };
 
@@ -55,6 +61,7 @@ export function LeadCaptureForm() {
       return;
     }
 
+    // Keep a single async submit path for clean loading/success/error transitions.
     setStatus("loading");
 
     try {
@@ -87,6 +94,9 @@ export function LeadCaptureForm() {
         <span className="text-sm font-medium text-slate-700">Full name</span>
         <input
           id="lead-full-name"
+          ref={(node) => {
+            inputRefs.current.fullName = node;
+          }}
           required
           type="text"
           autoComplete="name"
@@ -111,6 +121,9 @@ export function LeadCaptureForm() {
         <span className="text-sm font-medium text-slate-700">Work email</span>
         <input
           id="lead-work-email"
+          ref={(node) => {
+            inputRefs.current.workEmail = node;
+          }}
           required
           type="email"
           autoComplete="email"
@@ -135,6 +148,9 @@ export function LeadCaptureForm() {
         <span className="text-sm font-medium text-slate-700">Company</span>
         <input
           id="lead-company"
+          ref={(node) => {
+            inputRefs.current.company = node;
+          }}
           required
           type="text"
           autoComplete="organization"
@@ -159,6 +175,9 @@ export function LeadCaptureForm() {
         <span className="text-sm font-medium text-slate-700">Team size</span>
         <select
           id="lead-team-size"
+          ref={(node) => {
+            inputRefs.current.teamSize = node;
+          }}
           required
           value={form.teamSize}
           onChange={(event) => updateField("teamSize", event.target.value)}
@@ -187,6 +206,9 @@ export function LeadCaptureForm() {
         <span className="text-sm font-medium text-slate-700">Goals (optional)</span>
         <textarea
           id="lead-goals"
+          ref={(node) => {
+            inputRefs.current.message = node;
+          }}
           rows={4}
           value={form.message}
           onChange={(event) => updateField("message", event.target.value)}

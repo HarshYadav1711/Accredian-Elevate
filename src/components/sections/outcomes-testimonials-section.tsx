@@ -8,11 +8,11 @@ export function OutcomesTestimonialsSection() {
         <div className="lg:col-span-5">
           <p className="eyebrow">Outcomes</p>
           <h2 className="heading-section mt-3">
-            Enterprise-ready outcomes backed by measurable execution
+            Outcomes leaders can track against workforce goals
           </h2>
           <p className="body-md mt-4">
-            Move from course activity to capability impact with transparent milestones and
-            stakeholder-friendly reporting.
+            Replace fragmented learning metrics with role-level progress, delivery quality, and
+            adoption indicators leadership teams can use for planning.
           </p>
           <dl className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             {outcomeStats.map((item) => (
@@ -26,7 +26,7 @@ export function OutcomesTestimonialsSection() {
 
         <div id="testimonials" className="lg:col-span-7">
           <p className="text-sm font-semibold uppercase tracking-wide text-slate-600">
-            What enterprise teams say
+            Feedback from enterprise stakeholders
           </p>
           <div className="mt-4 grid gap-4">
             {testimonials.map((item) => (

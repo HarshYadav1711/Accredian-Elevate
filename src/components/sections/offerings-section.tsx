@@ -7,11 +7,11 @@ export function OfferingsSection() {
       <div>
         <p className="eyebrow">Offerings</p>
         <h2 className="heading-section mt-3 max-w-2xl">
-          Enterprise services designed for measurable workforce outcomes
+          Service modules built for enterprise rollout and measurable results
         </h2>
         <p className="body-md mt-4 max-w-2xl">
-          Select from modular service layers and deploy a tailored capability model that fits
-          your teams, timelines, and transformation priorities.
+          Choose focused service layers based on your operating model, target roles, and timeline,
+          then run a program plan leaders can review and scale.
         </p>
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
