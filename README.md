@@ -5,7 +5,6 @@ Production-grade partial clone of an enterprise SaaS landing page inspired by Ac
 ## Live Demo
 
 Production deployment: [accredian-elevate.vercel.app](https://accredian-elevate.vercel.app)
-Project dashboard: [Vercel Project Overview](https://vercel.com/harshs-projects-fc8c193d/accredian-elevate)
 
 Reference: [Accredian Enterprise](https://enterprise.accredian.com/)
 
@@ -114,7 +113,3 @@ Manual improvements done after AI assistance:
 1. Push this repository to GitHub.
 2. Import the project into Vercel.
 3. Deploy using default Next.js settings.
-
-Live link:
-
-- [Live Vercel URL](https://accredian-elevate.vercel.app)
