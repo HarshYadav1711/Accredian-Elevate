@@ -6,7 +6,12 @@ const leads: LeadRecord[] = [];
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as Partial<LeadRequest>;
+  let body: Partial<LeadRequest>;
+  try {
+    body = (await request.json()) as Partial<LeadRequest>;
+  } catch {
+    return NextResponse.json({ message: "Invalid request payload." }, { status: 400 });
+  }
 
   if (!body.fullName || body.fullName.trim().length < 2) {
     return NextResponse.json(
@@ -33,7 +38,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Please select your team size." }, { status: 400 });
   }
 
-  leads.push({
+  leads.unshift({
     id: crypto.randomUUID(),
     fullName: body.fullName.trim(),
     workEmail: body.workEmail.toLowerCase(),
@@ -42,6 +47,11 @@ export async function POST(request: Request) {
     message: body.message?.trim() || "",
     createdAt: new Date().toISOString(),
   });
+
+  // Keep a small in-memory history to avoid unbounded growth.
+  if (leads.length > 200) {
+    leads.pop();
+  }
 
   return NextResponse.json(
     {

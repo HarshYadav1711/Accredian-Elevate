@@ -14,16 +14,48 @@ const initialForm: LeadRequest = {
 export function LeadCaptureForm() {
   const [form, setForm] = useState<LeadRequest>(initialForm);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof LeadRequest, string>>>({});
 
   const updateField = (key: keyof LeadRequest, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+    setFieldErrors((prev) => ({ ...prev, [key]: undefined }));
+  };
+
+  const validate = () => {
+    const errors: Partial<Record<keyof LeadRequest, string>> = {};
+
+    if (!form.fullName.trim() || form.fullName.trim().length < 2) {
+      errors.fullName = "Please enter your full name.";
+    }
+
+    if (!form.workEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.workEmail)) {
+      errors.workEmail = "Please enter a valid work email.";
+    }
+
+    if (!form.company.trim() || form.company.trim().length < 2) {
+      errors.company = "Please enter your company name.";
+    }
+
+    if (!form.teamSize) {
+      errors.teamSize = "Please select your team size.";
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFeedbackMessage("");
+
+    if (!validate()) {
+      setStatus("error");
+      setFeedbackMessage("Please review the highlighted fields.");
+      return;
+    }
+
     setStatus("loading");
-    setMessage("");
 
     try {
       const response = await fetch("/api/leads", {
@@ -35,60 +67,88 @@ export function LeadCaptureForm() {
 
       if (!response.ok) {
         setStatus("error");
-        setMessage(data.message || "Unable to submit your request right now.");
+        setFeedbackMessage(data.message || "Unable to submit your request right now.");
         return;
       }
 
       setStatus("success");
-      setMessage(data.message || "Thanks. Our team will contact you shortly.");
+      setFeedbackMessage(data.message || "Thanks. Our team will contact you shortly.");
       setForm(initialForm);
+      setFieldErrors({});
     } catch {
       setStatus("error");
-      setMessage("Network issue. Please try again in a moment.");
+      setFeedbackMessage("Network issue. Please try again in a moment.");
     }
   };
 
   return (
-    <form className="grid gap-4" onSubmit={onSubmit}>
-      <label className="grid gap-2">
+    <form className="grid gap-4" onSubmit={onSubmit} noValidate>
+      <label className="grid gap-2" htmlFor="lead-full-name">
         <span className="text-sm font-medium text-slate-700">Full name</span>
         <input
+          id="lead-full-name"
           required
           type="text"
           value={form.fullName}
           onChange={(event) => updateField("fullName", event.target.value)}
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          aria-invalid={fieldErrors.fullName ? true : undefined}
+          aria-describedby={fieldErrors.fullName ? "lead-full-name-error" : undefined}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
+        {fieldErrors.fullName ? (
+          <p id="lead-full-name-error" className="text-xs text-rose-600">
+            {fieldErrors.fullName}
+          </p>
+        ) : null}
       </label>
 
-      <label className="grid gap-2">
+      <label className="grid gap-2" htmlFor="lead-work-email">
         <span className="text-sm font-medium text-slate-700">Work email</span>
         <input
+          id="lead-work-email"
           required
           type="email"
           value={form.workEmail}
           onChange={(event) => updateField("workEmail", event.target.value)}
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          aria-invalid={fieldErrors.workEmail ? true : undefined}
+          aria-describedby={fieldErrors.workEmail ? "lead-work-email-error" : undefined}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
+        {fieldErrors.workEmail ? (
+          <p id="lead-work-email-error" className="text-xs text-rose-600">
+            {fieldErrors.workEmail}
+          </p>
+        ) : null}
       </label>
 
-      <label className="grid gap-2">
+      <label className="grid gap-2" htmlFor="lead-company">
         <span className="text-sm font-medium text-slate-700">Company</span>
         <input
+          id="lead-company"
           required
           type="text"
           value={form.company}
           onChange={(event) => updateField("company", event.target.value)}
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          aria-invalid={fieldErrors.company ? true : undefined}
+          aria-describedby={fieldErrors.company ? "lead-company-error" : undefined}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
+        {fieldErrors.company ? (
+          <p id="lead-company-error" className="text-xs text-rose-600">
+            {fieldErrors.company}
+          </p>
+        ) : null}
       </label>
 
-      <label className="grid gap-2">
+      <label className="grid gap-2" htmlFor="lead-team-size">
         <span className="text-sm font-medium text-slate-700">Team size</span>
         <select
+          id="lead-team-size"
           required
           value={form.teamSize}
           onChange={(event) => updateField("teamSize", event.target.value)}
+          aria-invalid={fieldErrors.teamSize ? true : undefined}
+          aria-describedby={fieldErrors.teamSize ? "lead-team-size-error" : undefined}
           className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         >
           <option value="">Select a range</option>
@@ -97,29 +157,39 @@ export function LeadCaptureForm() {
           <option value="201-1000">201-1000</option>
           <option value="1000+">1000+</option>
         </select>
+        {fieldErrors.teamSize ? (
+          <p id="lead-team-size-error" className="text-xs text-rose-600">
+            {fieldErrors.teamSize}
+          </p>
+        ) : null}
       </label>
 
-      <label className="grid gap-2">
+      <label className="grid gap-2" htmlFor="lead-goals">
         <span className="text-sm font-medium text-slate-700">Goals (optional)</span>
         <textarea
+          id="lead-goals"
           rows={4}
           value={form.message}
           onChange={(event) => updateField("message", event.target.value)}
-          className="resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          className="resize-none rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
       </label>
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="mt-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "loading" ? "Submitting..." : "Request consultation"}
       </button>
 
-      {message ? (
-        <p className={`text-sm ${status === "error" ? "text-rose-600" : "text-emerald-700"}`}>
-          {message}
+      {feedbackMessage ? (
+        <p
+          role="status"
+          aria-live="polite"
+          className={`text-sm ${status === "error" ? "text-rose-600" : "text-emerald-700"}`}
+        >
+          {feedbackMessage}
         </p>
       ) : null}
     </form>
