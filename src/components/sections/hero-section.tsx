@@ -7,7 +7,7 @@ export function HeroSection() {
         <div className="lg:col-span-7">
           <p className="eyebrow">Enterprise Workforce Transformation</p>
           <h1 className="heading-display mt-5">
-            Close critical skill gaps and improve role readiness across teams.
+            Close priority skill gaps and improve project delivery readiness across teams.
           </h1>
           <p className="body-lg mt-6 max-w-2xl">
             Launch role-specific learning programs with clear milestones, manager accountability,
