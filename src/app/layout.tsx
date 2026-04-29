@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Accredian Enterprise Clone",
+  title: "Accredian Enterprise Learning Platform",
   description:
-    "A production-grade partial clone of Accredian Enterprise built with Next.js App Router and Tailwind CSS.",
+    "Enterprise learning and workforce transformation platform focused on measurable role readiness and business outcomes.",
 };
 
 export default function RootLayout({

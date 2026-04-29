@@ -6,6 +6,12 @@ export const trustBadges = [
   "People Transformation Leaders",
 ];
 
+export const whyAccredianPoints = [
+  "Role-level learning plans are tied to business priorities, not generic course catalogs.",
+  "Weekly governance and manager checkpoints keep delivery accountable across functions.",
+  "Outcome reporting focuses on readiness, adoption, and execution quality for leadership reviews.",
+];
+
 export const offerings = [
   {
     title: "Role-Based Learning Academies",
@@ -71,13 +77,13 @@ export const outcomeStats = [
 export const testimonials = [
   {
     quote:
-      "We replaced disconnected training vendors with one capability framework and a single operating rhythm our business leaders could follow.",
+      "We replaced disconnected training vendors with one capability framework, and within two quarters our product and analytics teams cut ramp-up time for new role transitions by 31%.",
     author: "Director, Enterprise Learning",
     company: "Digital Services Organization",
   },
   {
     quote:
-      "Manager-led checkpoints changed the quality of project delivery. Teams were not just finishing modules, they were applying skills on live work.",
+      "Manager-led checkpoints changed project delivery quality; over one review cycle, we saw a 24% increase in first-pass acceptance for data and automation deliverables.",
     author: "VP, Talent Transformation",
     company: "Global Technology Enterprise",
   },
