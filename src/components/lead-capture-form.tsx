@@ -89,10 +89,15 @@ export function LeadCaptureForm() {
           id="lead-full-name"
           required
           type="text"
+          autoComplete="name"
           value={form.fullName}
           onChange={(event) => updateField("fullName", event.target.value)}
-          aria-invalid={fieldErrors.fullName ? true : undefined}
-          aria-describedby={fieldErrors.fullName ? "lead-full-name-error" : undefined}
+          {...(fieldErrors.fullName
+            ? {
+                "aria-invalid": "true",
+                "aria-describedby": "lead-full-name-error",
+              }
+            : {})}
           className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
         {fieldErrors.fullName ? (
@@ -108,10 +113,15 @@ export function LeadCaptureForm() {
           id="lead-work-email"
           required
           type="email"
+          autoComplete="email"
           value={form.workEmail}
           onChange={(event) => updateField("workEmail", event.target.value)}
-          aria-invalid={fieldErrors.workEmail ? true : undefined}
-          aria-describedby={fieldErrors.workEmail ? "lead-work-email-error" : undefined}
+          {...(fieldErrors.workEmail
+            ? {
+                "aria-invalid": "true",
+                "aria-describedby": "lead-work-email-error",
+              }
+            : {})}
           className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
         {fieldErrors.workEmail ? (
@@ -127,10 +137,15 @@ export function LeadCaptureForm() {
           id="lead-company"
           required
           type="text"
+          autoComplete="organization"
           value={form.company}
           onChange={(event) => updateField("company", event.target.value)}
-          aria-invalid={fieldErrors.company ? true : undefined}
-          aria-describedby={fieldErrors.company ? "lead-company-error" : undefined}
+          {...(fieldErrors.company
+            ? {
+                "aria-invalid": "true",
+                "aria-describedby": "lead-company-error",
+              }
+            : {})}
           className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         />
         {fieldErrors.company ? (
@@ -147,8 +162,12 @@ export function LeadCaptureForm() {
           required
           value={form.teamSize}
           onChange={(event) => updateField("teamSize", event.target.value)}
-          aria-invalid={fieldErrors.teamSize ? true : undefined}
-          aria-describedby={fieldErrors.teamSize ? "lead-team-size-error" : undefined}
+          {...(fieldErrors.teamSize
+            ? {
+                "aria-invalid": "true",
+                "aria-describedby": "lead-team-size-error",
+              }
+            : {})}
           className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
         >
           <option value="">Select a range</option>
@@ -184,13 +203,15 @@ export function LeadCaptureForm() {
       </button>
 
       {feedbackMessage ? (
-        <p
-          role="status"
-          aria-live="polite"
-          className={`text-sm ${status === "error" ? "text-rose-600" : "text-emerald-700"}`}
-        >
-          {feedbackMessage}
-        </p>
+        status === "error" ? (
+          <p role="status" aria-live="assertive" className="text-sm text-rose-600">
+            {feedbackMessage}
+          </p>
+        ) : (
+          <p role="status" aria-live="polite" className="text-sm text-emerald-700">
+            {feedbackMessage}
+          </p>
+        )
       ) : null}
     </form>
   );

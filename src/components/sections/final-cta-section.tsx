@@ -19,7 +19,7 @@ export function FinalCtaSection() {
           <p className="mt-6 text-sm text-slate-300">Response time: within 1 business day.</p>
           <a
             href="mailto:enterprise@accredian.example"
-            className="mt-4 inline-flex text-sm font-medium text-indigo-200 transition hover:text-indigo-100"
+            className="mt-4 inline-flex rounded-sm text-sm font-medium text-indigo-200 transition hover:text-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
           >
             Prefer email? enterprise@accredian.example
           </a>

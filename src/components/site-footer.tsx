@@ -31,7 +31,7 @@ export function SiteFooter() {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="text-sm text-slate-600 transition hover:text-slate-900"
+                        className="rounded-sm text-sm text-slate-600 transition hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                       >
                         {link.label}
                       </a>

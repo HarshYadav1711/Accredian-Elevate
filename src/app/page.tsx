@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <div id="top" />
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <TrustRow />
         <OfferingsSection />

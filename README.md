@@ -4,92 +4,114 @@ Production-grade partial clone of an enterprise SaaS landing page inspired by Ac
 
 Reference: [Accredian Enterprise](https://enterprise.accredian.com/)
 
-## Tech Stack
+## Stack
 
-- Next.js (App Router)
+- Next.js App Router
 - TypeScript
 - React functional components + hooks
 - Tailwind CSS
-- Next.js Route Handlers (`/api/leads`) for bonus lead capture API
+- Next.js Route Handlers for bonus lead capture API
 
-All dependencies are free and actively maintained.
+No paid dependencies, no external paid backends, and no unnecessary libraries.
 
-## Setup Instructions
+## Setup
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
-Production checks:
+Quality checks:
 
 ```bash
 npm run lint
 npm run build
 ```
 
-## Architecture and Approach
+## Architecture
 
-The app is intentionally scoped to one high-quality landing page with reusable section architecture:
+The project is intentionally scoped to a single landing page with modular, reusable sections.
 
-- `src/app/page.tsx`: page composition and section flow
-- `src/components/site-header.tsx`: sticky navigation with smooth section links
-- `src/components/site-footer.tsx`: structured footer links
-- `src/components/section-heading.tsx`: reusable heading pattern
-- `src/components/lead-capture-form.tsx`: bonus lead form with accessible interactions and states
-- `src/app/api/leads/route.ts`: typed mock/in-memory API integration
-- `src/data/landing-content.ts`: data-driven content arrays for reusable rendering
-- `src/types/lead.ts`: shared TypeScript types for lead payload/records
+### App Composition
 
-Design intent:
+- `src/app/page.tsx` - sequential composition of all landing sections
+- `src/app/layout.tsx` - global metadata, fonts, and skip-link for accessibility
+- `src/app/globals.css` - Tailwind component tokens (`btn`, headings, cards, spacing surfaces)
 
-- Calm and credible B2B visual language
-- Mobile-first responsive layout
-- Semantic sections and clear information hierarchy
-- Subtle hover/focus states, minimal non-distracting motion
+### Reusable UI Primitives
 
-## API Integration (Bonus)
+- `src/components/ui/container.tsx` - shared max-width and responsive horizontal padding
+- `src/components/ui/section.tsx` - semantic section wrapper with scroll anchor offset
 
-- `POST /api/leads` validates payload and stores submissions in memory.
-- `GET /api/leads` returns current mock records for local verification.
-- No paid service or external database required.
+### Landing Sections
 
-## AI Usage (Required by Assignment)
+- `src/components/sections/hero-section.tsx`
+- `src/components/sections/trust-row.tsx`
+- `src/components/sections/offerings-section.tsx`
+- `src/components/sections/process-section.tsx`
+- `src/components/sections/outcomes-testimonials-section.tsx`
+- `src/components/sections/final-cta-section.tsx`
+- `src/components/site-header.tsx`
+- `src/components/site-footer.tsx`
+
+### Lead Capture Bonus
+
+- `src/components/lead-capture-form.tsx` - accessible form with client validation and submit states
+- `src/app/api/leads/route.ts` - `POST` + `GET` handler with in-memory storage (free, self-contained)
+- `src/types/lead.ts` - typed request and record contracts
+
+### Content Configuration
+
+- `src/data/top-half-content.ts` - data arrays for badges, offerings, process steps, testimonials, stats, and footer links
+
+## Design and UX Approach
+
+- Calm enterprise visual language with strong typography hierarchy
+- Mobile-first responsive behavior and readable line lengths
+- Soft borders, subtle shadows, generous whitespace
+- Seamless anchor navigation with sticky header
+- Keyboard-friendly focus states and semantic HTML landmarks
+
+## API and Persistence Strategy
+
+- `POST /api/leads` validates payload and stores records in memory.
+- `GET /api/leads` returns stored records for local verification.
+- Records are capped to a small in-memory history to avoid unbounded growth.
+- This intentionally demonstrates realistic API integration without paid infrastructure.
+
+## AI Usage (Assignment Requirement)
 
 AI was used for:
 
-- Initial project structure scaffolding
-- Generating baseline section ideas and content blocks
-- Suggesting component decomposition and typed API payload shapes
+- Initial scaffold and section decomposition brainstorming
+- Drafting early content structure and validation flow ideas
+- Accelerating repetitive implementation tasks
 
-Manual improvements performed:
+Manual improvements done after AI assistance:
 
-- Rewrote and refined copy for consistent enterprise tone
-- Curated section flow to improve scanning and conversion intent
-- Adjusted spacing, typography hierarchy, and contrast for UI polish
-- Tightened TypeScript typing and validation logic in route handler
-- Simplified dependencies and removed unnecessary complexity
+- Rewrote all key copy for enterprise tone and clarity
+- Refined spacing, alignment, and typography for visual consistency
+- Tightened accessibility (labels, skip link, focus states, feedback semantics)
+- Cleaned dead code and simplified component boundaries
+- Hardened route handler input handling and in-memory strategy
 
-## What I Would Improve With More Time
+## Future Enhancements (If More Time)
 
-- Add richer visual proof components (case study cards, logo wall, KPI trends)
-- Add stricter server-side validation and lightweight persistence option
-- Expand accessibility audit (keyboard flow and screen reader checks)
-- Add unit tests for route validation and key component rendering
-- Add subtle scroll-linked cues for section transitions (still minimal)
+- Add lightweight unit tests for form validation and API handler behavior
+- Add richer proof components (case studies or customer logo wall)
+- Add optional persistence adapter (file or DB) behind same route contract
+- Expand accessibility audit with screen-reader flow checks
 
 ## Deployment
 
-Deploy to Vercel:
+1. Push this repository to GitHub.
+2. Import the project into Vercel.
+3. Deploy using default Next.js settings.
 
-1. Push repository to GitHub
-2. Import project in Vercel
-3. Deploy with default Next.js settings
+Submission checklist:
 
-Add the resulting links in submission:
-
-- Vercel live URL
+- Live Vercel URL
 - GitHub repository URL
-- Assignment form link from the PDF
+- Assignment form submission link
